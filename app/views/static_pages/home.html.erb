@@ -1,12 +1,44 @@
 <% provide(:title, 'Home') %>
 
-<h1>Home</h1>
 <p>Welcome to Manage Band!</p>
 
 <div class="login">
 	<form>
 		<label for="login">Email</label><input type="text" name="login" />
 		<label for="password">Password</label><input type="password" name="password" />
-		<input type="submit" value="OK" />
+		<input type="submit" value="Login" />
 	</form>
+</div>
+<div class="register">
+	<p>sign up for free!</p>
+
+	<!-- Trigger the modal with a button -->
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Sign up!</button>
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Register to our site!</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<div><label for="name">Name</label><input type="text" name="name" /></div>
+	      	<div><label for="login">Email</label><input type="text" name="login" /></div>
+			<div><label for="password">Password</label><input type="password" name="password" /></div>
+			<div><label for="password-confirm">Confirm password</label><input type="password" name="password-confirm" /></div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
+
+
 </div>

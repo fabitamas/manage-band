@@ -12,6 +12,11 @@ describe "StaticPages" do
       page.should have_content('Welcome')
     end
 
+    it "should have the content 'Manage Band'" do
+      visit '/static_pages/home'
+      page.should have_content('Manage Band')
+    end
+
   end
 
   describe "Help page" do
