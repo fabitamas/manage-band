@@ -1,18 +1,11 @@
+<%provide(:title, @member.name) %>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Nick:</b>
-  <%= @member.nick %>
-</p>
-
-<p>
-  <b>Firstname:</b>
-  <%= @member.firstname %>
-</p>
-
-<p>
-  <b>Lastname:</b>
-  <%= @member.lastname %>
+  <h1>
+  	<%= gravatar_for @member %>
+  	<%= @member.name %>
+  </h1>
 </p>
 
 <p>

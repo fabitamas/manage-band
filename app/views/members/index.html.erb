@@ -2,9 +2,7 @@
 
 <table>
   <tr>
-    <th>Nick</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
+    <th>Name</th>
     <th>Email</th>
     <th></th>
     <th></th>
@@ -13,9 +11,7 @@
 
 <% @members.each do |member| %>
   <tr>
-    <td><%= member.nick %></td>
-    <td><%= member.firstname %></td>
-    <td><%= member.lastname %></td>
+    <td><%= member.name %></td>
     <td><%= member.email %></td>
     <td><%= link_to 'Show', member %></td>
     <td><%= link_to 'Edit', edit_member_path(member) %></td>

@@ -1,19 +1,17 @@
 <% provide(:title, 'Home') %>
 
-<p>Welcome to Manage Band!</p>
-
-<div class="login">
-	<form>
-		<label for="login">Email</label><input type="text" name="login" />
-		<label for="password">Password</label><input type="password" name="password" />
-		<input type="submit" value="Login" />
+<div class="login flex">
+	<form class="column">
+		<p><label for="login">Email</label><input type="text" name="login" class="right" /></p>
+		<p><label for="password">Password</label><input type="password" name="password" class="right" /></p>
+		<p><input type="submit" value="Login" class="right"/></p>
 	</form>
 </div>
 <div class="register">
-	<p>sign up for free!</p>
+	<p>...or sign up for free!</p>
 
 	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Sign up!</button>
+	<button id="sign_up" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Sign up!</button>
 
 	<!-- Modal -->
 	<div id="myModal" class="modal fade" role="dialog">
@@ -25,20 +23,79 @@
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        <h4 class="modal-title">Register to our site!</h4>
 	      </div>
-	      <div class="modal-body">
-	      	<div><label for="name">Name</label><input type="text" name="name" /></div>
-	      	<div><label for="login">Email</label><input type="text" name="login" /></div>
-			<div><label for="password">Password</label><input type="password" name="password" /></div>
-			<div><label for="password-confirm">Confirm password</label><input type="password" name="password-confirm" /></div>
+	      <div class="modal-body flex">
+	      	<form action="/members" id="new_member" method="post" class="new_member column">
+	      		<p id="form-errors">
+	      			
+	      		</p>
+	      		<p>
+	      			<label for="member_name">Name</label>
+	      			<input id="member_name" type="text" name="member[name]" class="right" />
+	      		</p>
+	      		<p>
+	      			<label for="member_email">Email</label>
+	      			<input id="member_email" type="text" name="member[email]" class="right" />	
+	      		</p>
+				<p>
+					<label for="member_password">Password</label>
+					<input id="member_password" type="password" name="member[password]" class="right" />
+				</p>
+				<p>
+					<label for="password_confirm">Confirm password</label>
+					<input id="password_confirm" type="password" name="member[password_confirmation]" class="right"/>
+				</p>
+			</form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      	<button id="btn-create_member" type="button" class="btn btn-default">Create my account</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	      </div>
 	    </div>
 
 	  </div>
+  		
+</script>
 	</div>
 
 
 
 </div>
+
+<script type="text/javascript">
+	<% if flash[:open_signup] == true %>
+		$("#sign_up").click();
+	<% end %>
+
+	$("#btn-create_member").click(function(){
+		if (validate_form()) {
+			// submit the form
+			$("#myModal").hide();
+			$("#new_member").submit();
+		}		
+	});
+
+	function validate_form() {
+		$("#form-errors").empty();
+		var pass = true;
+
+		if ($("#member_name").val().length < 1) {
+			pass = false;
+			$("#form-errors").append("<p>Name is required</p>");
+		}
+		if ($("#member_email").val().length < 1) {
+			pass = false;
+			$("#form-errors").append("<p>Email is required</p>");
+		}
+		if ($("#member_password").val().length < 6) {
+			pass = false;
+			$("#form-errors").append("<p>Password must be 6 characters at least</p>");
+		}
+		if ($("#password_confirm").val() != $("#member_password").val()) {
+			pass = false;
+			$("#form-errors").append("<p>Confirmation must match</p>");
+		}
+
+
+		return pass;
+	}
+</script>

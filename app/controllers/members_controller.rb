@@ -25,11 +25,6 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @member }
-    end
   end
 
   # GET /members/1/edit
@@ -40,16 +35,12 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(params[:member])
-
-    respond_to do |format|
-      if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
-        format.json { render json: @member, status: :created, location: @member }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
-      end
+    @member = Member.new(params[:member])    
+    if @member.save
+      redirect_to @member, notice: 'Member was successfully created.'
+    else
+      flash[:open_signup] = true
+      redirect_to "/static_pages/home", notice: 'Something went wrong... try again'
     end
   end
 
