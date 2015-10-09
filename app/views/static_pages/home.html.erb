@@ -25,7 +25,7 @@
 	      </div>
 	      <div class="modal-body flex">
 	      	<form action="/members" id="new_member" method="post" class="new_member column">
-	      		<p id="form-errors">
+	      		<p id="form-errors" class="alert alert-danger" style="display: none;">
 	      			
 	      		</p>
 	      		<p>
@@ -75,7 +75,7 @@
 	});
 
 	function validate_form() {
-		$("#form-errors").empty();
+		$("#form-errors").empty().hide();
 		var pass = true;
 
 		if ($("#member_name").val().length < 1) {
@@ -90,9 +90,18 @@
 			pass = false;
 			$("#form-errors").append("<p>Password must be 6 characters at least</p>");
 		}
+		if ($("#password_confirm").val().length < 1) {
+			pass = false;
+			$("#form-errors").append("<p>Password confirmation needs to be filled</p>");
+		}
 		if ($("#password_confirm").val() != $("#member_password").val()) {
 			pass = false;
 			$("#form-errors").append("<p>Confirmation must match</p>");
+		}
+
+
+		if (!pass) {
+			$("#form-errors").show();
 		}
 
 
