@@ -1,4 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
+ruby "2.2.4"
+
 
 gem 'rails', '3.2.11'
 gem 'bcrypt-ruby', '3.0.1'
